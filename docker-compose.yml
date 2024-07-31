@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+  api:
+    build: 
+      context: ./orders-backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./orders-backend:/cometa/code 
+    ports:
+      - 8000:8000
+  web:
+    build:
+      context: ./orders-frontend
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./orders-frontend:/cometa/code 
+      - /cometa/code/node_modules
+    environment:
+      NODE_ENV: development
